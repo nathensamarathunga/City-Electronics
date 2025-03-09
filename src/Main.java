@@ -25,25 +25,20 @@ class Main {
             option = input.nextByte();
             if (option == 1 || option == 2) {
                 valid = 2;
-                if (option == 1)
-                    customerCheckLogin();
-                else
-                    employeeCheckLogin();
+                checkLogin(option);
             }
             else
                 System.out.println("Invalid Input");
         }
     }
 
-    public static void customerCheckLogin(){
-
+    public static void checkLogin(int option) {
         i = 0;
 
         String check;
 
-        String[][] users = { {"Ranil", "Ranil@123"}, {"Kamal", "Kamal@123"}, {"Mahinda", "Mahinda@123"} };
-
-        System.out.println("Customer Login Under Construction");
+        String[][] customersCredentials = { {"Ranil", "Ranil@123"}, {"Kamal", "Kamal@123"}, {"Mahinda", "Mahinda@123"} };
+        String[][] employeeCredentials = { {"Admin", "Ad@123"}, {"Manager", "Mgr@123"}, {"Employee", "Emp@123"} };
 
         System.out.print("Enter Username\t: ");
         userCredentials[0][0] = input.next();
@@ -51,14 +46,24 @@ class Main {
         System.out.print("Enter Password\t: ");
         userCredentials[0][1] = input.next();
 
+
         while ((loginState == false) && i < 2) {
 
-            if ((Objects.equals(users[i][0], userCredentials[0][0])) && (Objects.equals(users[i][1], userCredentials[0][1]))) {
-                loginState = true;
-                break;
+            if (option == 1) {
+                if ((Objects.equals(customersCredentials[i][0], userCredentials[0][0])) && (Objects.equals(customersCredentials[i][1], userCredentials[0][1]))) {
+                    loginState = true;
+                    break;
+                } else
+                    i++;
+            } else {
+                if ((Objects.equals(employeeCredentials[i][0], userCredentials[0][0])) && (Objects.equals(employeeCredentials[i][1], userCredentials[0][1]))) {
+                    loginState = true;
+                    break;
+                }
+                else
+                    i++;
             }
-            else
-                i++;
+
         }
 
         if (loginState == false) {
@@ -67,59 +72,20 @@ class Main {
             check = input.next();
 
             if (check == "Y")
-                customerCheckLogin();
+                checkLogin(option);
             else
                 loginPage();
 
         } else {
             System.out.println("Successfully Logged In!");
-            customerActions();
-        }
-
-
-
-    }
-
-    public static void employeeCheckLogin(){
-
-        i = 0;
-
-        String check;
-
-        String[][] users = { {"Admin", "Ad@123"}, {"Manager", "Mgr@123"}, {"Employee", "Emp@123"} };
-
-        System.out.println("Employee Login Under Construction");
-
-        System.out.print("Enter Username\t: ");
-        userCredentials[0][0] = input.next();
-
-        System.out.print("Enter Password\t: ");
-        userCredentials[0][1] = input.next();
-
-        while ((loginState == false) && i < 2) {
-
-            if ((Objects.equals(users[i][0], userCredentials[0][0])) && (Objects.equals(users[i][1], userCredentials[0][1]))) {
-                loginState = true;
-                break;
-            }
+            if (option == 1)
+                customerActions();
             else
-                i++;
+                employeeActions();
         }
 
-        if (loginState == false) {
-            System.out.println("Invalid Login Information");
-            System.out.println("Do you want to try again? (Y/N)\t: ");
-            check = input.next();
 
-            if (check == "Y")
-                employeeCheckLogin();
-            else
-                loginPage();
 
-        } else {
-            System.out.println("Successfully Logged In!");
-            employeeActions();
-        }
     }
 
     public static void customerActions() {
