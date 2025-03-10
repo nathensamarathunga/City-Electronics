@@ -47,7 +47,7 @@ class Main {
         userCredentials[0][1] = input.next();
 
 
-        while ((loginState == false) && i < 2) {
+        while ((loginState == false) && i < 3) {
 
             if (option == 1) {
                 if ((Objects.equals(customersCredentials[i][0], userCredentials[0][0])) && (Objects.equals(customersCredentials[i][1], userCredentials[0][1]))) {
