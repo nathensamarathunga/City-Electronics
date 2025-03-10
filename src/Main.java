@@ -13,7 +13,7 @@ class Main {
 
     public static void loginPage() {
         int valid = 1;
-        int option = 0;
+        int option;
 
         System.out.println("--------------------------------------------------------");
         System.out.println("\t\t\tWelcome to City Electronics!");
@@ -40,14 +40,16 @@ class Main {
         String[][] customersCredentials = { {"Ranil", "Ranil@123"}, {"Kamal", "Kamal@123"}, {"Mahinda", "Mahinda@123"} };
         String[][] employeeCredentials = { {"Admin", "Ad@123"}, {"Manager", "Mgr@123"}, {"Employee", "Emp@123"} };
 
+        System.out.println("\n--------------------------------------------------------");
         System.out.print("Enter Username\t: ");
         userCredentials[0][0] = input.next();
 
         System.out.print("Enter Password\t: ");
         userCredentials[0][1] = input.next();
+        System.out.println("--------------------------------------------------------");
 
 
-        while ((loginState == false) && i < 2) {
+        while ((!loginState) && i < 3) {
 
             if (option == 1) {
                 if ((Objects.equals(customersCredentials[i][0], userCredentials[0][0])) && (Objects.equals(customersCredentials[i][1], userCredentials[0][1]))) {
@@ -66,7 +68,7 @@ class Main {
 
         }
 
-        if (loginState == false) {
+        if (!loginState) {
             System.out.println("Invalid Login Information");
             System.out.println("Do you want to try again? (Y/N)\t: ");
             check = input.next();
@@ -77,7 +79,7 @@ class Main {
                 loginPage();
 
         } else {
-            System.out.println("Successfully Logged In!");
+            System.out.println("Welcome " + userCredentials[0][1] + "You're Successfully Logged In!");
             if (option == 1)
                 customerActions();
             else
@@ -94,7 +96,7 @@ class Main {
 
     }
 
-    public static void main(String args[]){
+    public static void main(String []args){
 
         loginPage();
 
