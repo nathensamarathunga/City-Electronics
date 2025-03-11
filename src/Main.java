@@ -10,7 +10,7 @@ class Products {
 
     public static int[] productsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
 
-    public static int productCount = 5, productNumber = 1, position = 0;
+    public static int productCount = 5, productNumber = 1, position = 0, totalPrice = 0;
 
     public static void productsTable() {
 
@@ -58,9 +58,27 @@ class Products {
 
     public static void priceCalculation() {
 
-        for(int i = 0; i < productCount; i ++) {
-            System.out.println(productsChosen[i]);
+        for (int i = 0; i < productCount; i++) {
+
+            totalPrice += (productPrice[i] * productsChosen[i]);
+
         }
+
+        System.out.println("--------------------------------------------------------");
+        System.out.println("Your bill is,");
+
+        for (position = 0; position < productCount; position++) {
+
+            if (productsChosen[position] == 1 ) {
+
+                System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + productPrice[position]);
+
+            }
+
+        }
+
+        System.out.println("LKR." + totalPrice);
+
 
     }
 
@@ -73,7 +91,7 @@ class Main {
 
     public static Scanner input = new Scanner(System.in);
 
-    public static int i, option;
+    public static int i;
 
     public static int loginPage() {
         int option;
@@ -85,8 +103,10 @@ class Main {
         System.out.println("\nCustomer Login\t- 1 \nEmployee Login\t- 2");
 
         while (true) {
+
             System.out.print("\nSelect Login Option\t: ");
             option = input.nextByte();
+
             if (option == 1 || option == 2) {
                 break;
             }
@@ -97,6 +117,7 @@ class Main {
         checkLogin(option);
 
         while (!loginState) {
+
             System.out.println("Invalid Login Information");
             System.out.println("Do you want to try again? (Y/N)\t: ");
             check = input.next();
@@ -110,7 +131,6 @@ class Main {
         System.out.println("Welcome " + userCredentials[0][0] + ", You're Successfully Logged In!");
 
         return option;
-
     }
 
     public static void checkLogin(int option) {
