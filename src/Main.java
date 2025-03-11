@@ -11,8 +11,8 @@ class Main {
 
     public static int i, option;
 
-    public static int loginPage() {
-        int valid = 1, option = 0;
+    public static void loginPage() {
+        int option;
         String check;
 
         System.out.println("--------------------------------------------------------");
@@ -20,7 +20,7 @@ class Main {
         System.out.println("--------------------------------------------------------");
         System.out.println("\nCustomer Login\t- 1 \nEmployee Login\t- 2");
 
-        while (valid == 1) {
+        while (true) {
             System.out.print("\nSelect Login Option\t: ");
             option = input.nextByte();
             if (option == 1 || option == 2) {
@@ -41,15 +41,13 @@ class Main {
                 checkLogin(option);
             else
                 loginPage();
-
         }
 
         System.out.println("Welcome " + userCredentials[0][0] + ", You're Successfully Logged In!");
 
-        return option;
     }
 
-    public static boolean checkLogin(int option) {
+    public static void checkLogin(int option) {
         i = 0;
 
         String[][] customersCredentials = { {"Ranil", "Ranil@123"}, {"Kamal", "Kamal@123"}, {"Mahinda", "Mahinda@123"} };
@@ -82,8 +80,6 @@ class Main {
             }
 
         }
-
-        return loginState;
 
     }
 
