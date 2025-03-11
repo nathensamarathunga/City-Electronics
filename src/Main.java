@@ -1,6 +1,28 @@
 import java.util.Objects;
 import java.util.Scanner;
 
+
+class Products {
+
+    public static String[] productName = {"Refrigerator", "Washing Machine", "Electric Kettle", "Mixer", "Electric Stove"};
+    public static int[] productPricing = {175000, 60000, 74000, 12000,  25000};
+
+    public static int productCount = 5;
+
+    public static void productsTable() {
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n--------------------------------------------------------");
+        System.out.println("\t\t\tProduct List");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("Product\t \tPrice");
+
+        for (int i = 0; i < productCount; i++) {
+
+        }
+
+    }
+
+}
 class Main {
 
     public static boolean loginState = false;
@@ -37,7 +59,7 @@ class Main {
             System.out.println("Do you want to try again? (Y/N)\t: ");
             check = input.next();
 
-            if (Objects.equals(check, "Y"))
+            if (check.equalsIgnoreCase("Y"))
                 checkLogin(option);
             else
                 loginPage();
