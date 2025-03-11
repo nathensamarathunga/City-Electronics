@@ -58,8 +58,6 @@ class Products {
 
     public static void priceCalculation() {
 
-        int selectionCheck = 0;
-
         for (int i = 0; i < productCount; i++) {
 
             totalPrice += (productPrice[i] * productsChosen[i]);
@@ -69,20 +67,6 @@ class Products {
         System.out.println("--------------------------------------------------------");
         System.out.println("Your bill is,");
 
-/*        while (position < productCount) {
-
-            if (productsChosen[position] == 1 ) {
-
-                System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + productPrice[position]);
-
-            }
-            else
-                continue;
-
-            position++;
-
-        }*/
-
         for (position = 0; position < productCount; position++) {
 
             if (productsChosen[position] == 1 ) {
@@ -90,8 +74,6 @@ class Products {
                 System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + productPrice[position]);
 
             }
-            else
-                continue;
 
         }
 
@@ -109,7 +91,7 @@ class Main {
 
     public static Scanner input = new Scanner(System.in);
 
-    public static int i, option;
+    public static int i;
 
     public static int loginPage() {
         int option;
