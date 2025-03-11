@@ -1,6 +1,70 @@
 import java.util.Objects;
 import java.util.Scanner;
 
+
+class Products {
+
+    public static Scanner input = new Scanner(System.in);
+    public static String[] productName = {"Refrigerator", "Washing Machine", "Electric Kettle", "Electric Mixer", "Electric Stove"};
+    public static int[] productPrice = {175000, 60000, 74000, 12000,  25000};
+
+    public static int[] productsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
+
+    public static int productCount = 5, productNumber = 1, position = 0;
+
+    public static void productsTable() {
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n--------------------------------------------------------");
+        System.out.println("\t\t\tProduct List");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("Product\t\t \t\t|\tPrice");
+        System.out.println("--------------------------------------------------------");
+
+        for (int i = 0; i < productCount; i++) {
+
+            System.out.println((i+1) + ". " + productName[i] + "\t\t-\t" + productPrice[i]);
+
+        }
+
+    }
+
+    public static void cartFunction() {
+
+        int i = 0, y = 0;
+
+        System.out.println("Add products to cart");
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println("Enter 1 product number at a time and hit enter \nTo exit enter '0'");
+
+        while ((productNumber != 0) || (y < productCount)) {
+
+            System.out.print("Selection " + ++i + " : ");
+            productNumber = input.nextInt();
+
+            if (productNumber == 0)
+                break;
+            else {
+
+                productsChosen[productNumber - 1] = 1;
+
+            }
+
+            y++;
+
+        }
+
+    }
+
+    public static void priceCalculation() {
+
+        for(int i = 0; i < productCount; i ++) {
+            System.out.println(productsChosen[i]);
+        }
+
+    }
+
+}
 class Main {
 
     public static boolean loginState = false;
@@ -11,7 +75,7 @@ class Main {
 
     public static int i, option;
 
-    public static void loginPage() {
+    public static int loginPage() {
         int option;
         String check;
 
@@ -37,13 +101,15 @@ class Main {
             System.out.println("Do you want to try again? (Y/N)\t: ");
             check = input.next();
 
-            if (Objects.equals(check, "Y"))
+            if (check.equalsIgnoreCase("Y"))
                 checkLogin(option);
             else
                 loginPage();
         }
 
         System.out.println("Welcome " + userCredentials[0][0] + ", You're Successfully Logged In!");
+
+        return option;
 
     }
 
@@ -85,7 +151,9 @@ class Main {
 
     public static void customerActions() {
 
-        System.out.println("Welcome Customer");
+        Products.productsTable();
+        Products.cartFunction();
+        Products.priceCalculation();
 
     }
 
@@ -97,7 +165,7 @@ class Main {
 
     public static void main(String []args){
 
-        loginPage();
+        int option = loginPage();
 
         if (option == 1)
             customerActions();
