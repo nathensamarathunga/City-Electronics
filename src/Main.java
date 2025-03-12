@@ -1,19 +1,53 @@
 import java.util.Objects;
 import java.util.Scanner;
 
+class Orders {
+
+    public static int userCount;
+    public static String[] userNames = {"null", "null", "null"};
+    //public static int[] orderID = {101, 102, 103, 104, 105};
+    //public static int[] productsChosenLocal = Products.productsChosen;
+    //public static int[] quantitiesLocal = Products.quantities;
+
+    public static void assignUsers() {
+
+        for(userCount = 0; userCount < 3; userCount++) {
+
+            userNames[userCount] = Main.userCredentials[userCount][0];
+
+            userCount++;
+
+        }
+
+    }
+
+    public static void setOrders() {
+
+        assignUsers();
+
+
+    }
+
+    public static void viewOrders() {
+
+        setOrders();
+
+
+
+    }
+
+
+}
+
 
 class Products {
 
     public static Scanner input = new Scanner(System.in);
-    public static String[] productName = {"Refrigerator", "Washing Machine", "Electric Kettle", "Electric Mixer", "Electric Stove"};
-    public static int[] productPrice = {175000, 60000, 74000, 12000,  25000};
-
+    public static String[] productName = {"Refrigerator", "Washing Machine", "Electric Kettle", "Electric Mixer", "Electric Stove", "null", "null"};
+    public static int[] productPrice = {175000, 60000, 74000, 12000,  25000, 0, 0};
     public static int[] productsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
-
     public static int[] quantities = {0, 0, 0, 0, 0, 0, 0, 0};
-
     public static int productCount = 5, productNumber = 1, position = 0, totalPrice = 0;
-
     public static void productsTable() {
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n--------------------------------------------------------");
@@ -83,19 +117,111 @@ class Products {
         }
 
         System.out.println("LKR." + totalPrice);
+        System.out.println("--------------------------------------------------------");
 
 
     }
 
+    public static void changeProducts() {
+
+        productsTable();
+
+        System.out.println("--------------------------------------------------------");
+        System.out.println("Update Product List");
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println("Select Option,");
+        System.out.println("1 - Add");
+        System.out.println("2 - Modify");
+        System.out.println("3 - Remove");
+
+        System.out.print("Your selection: ");
+        int option = input.nextInt();
+
+        switch(option) {
+            case 1:
+                addProduct();
+                break;
+            case 2:
+                modifyProduct();
+                break;
+            case 3:
+                removeProduct();
+                break;
+            default:
+                System.out.println("Invalid Selection");
+        }
+
+        productsTable();
+    }
+
+    public static void addProduct() {
+
+        System.out.print("New Product Name\t: ");
+        productName[productCount] = input.next();
+
+        System.out.print("New Product Price\t: ");
+        productPrice[productCount] = input.nextInt();
+
+        System.out.println("Successfully added product " + productName[productCount]);
+
+        productCount++;
+
+    }
+
+    public static void modifyProduct() {
+
+        System.out.println("Select product number to modify\t: ");
+        position = input.nextInt();
+
+        System.out.print("Enter new product name\t: ");
+        productName[position-1] = input.next();
+
+        System.out.print("Enter product price\t: ");
+        productPrice[position-1] = input.nextInt();
+
+    }
+
+    public static void removeProduct() {
+
+        String[] tempProductName = productName;
+        int[] tempProductPrice = productPrice;
+        int tempPosition;
+
+        System.out.print("Select product to remove\t: ");
+        position = input.nextInt();
+        position--;
+
+        System.out.println("Are you sure? (Y/N)\t: ");
+        String choice = input.next();
+
+        if (choice.equalsIgnoreCase("Y")) {
+
+            for (tempPosition = position; tempPosition < (productCount-1); tempPosition++) {
+
+                tempProductName[tempPosition] = productName[tempPosition+1];
+                tempProductPrice[tempPosition] = productPrice[tempPosition+1];
+
+            }
+
+            productName = tempProductName;
+            productPrice = tempProductPrice;
+
+            productCount--;
+
+        }
+        else
+            System.out.println("Aborted....");
+
+
+    }
 }
+
 class Main {
 
     public static boolean loginState = false;
-
     public static String[][] userCredentials = {{"null", "null"}};
-
     public static Scanner input = new Scanner(System.in);
-
     public static int i;
 
     public static int loginPage() {
@@ -184,15 +310,30 @@ class Main {
 
     public static void employeeActions() {
 
-        System.out.println("Welcome Employee");
+        System.out.println("Which Action do you want to perform?,");
+        System.out.println("Modify Products\t\t- 1");
+        System.out.println("View Customer Orders\t\t- 2");
+
+        System.out.print("Your selection: ");
+        int activityOption = input.nextInt();
+
+        switch(activityOption) {
+            case 1:
+                Products.changeProducts();
+                break;
+            case 2:
+                Orders.viewOrders();
+            default:
+                System.out.println("Invalid Selection");
+        }
 
     }
 
     public static void main(String []args){
 
-        int option = loginPage();
+        int userOption = loginPage();
 
-        if (option == 1)
+        if (userOption == 1)
             customerActions();
         else
             employeeActions();
