@@ -10,6 +10,8 @@ class Products {
 
     public static int[] productsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
 
+    public static int[] quantities = {0, 0, 0, 0, 0, 0, 0, 0};
+
     public static int productCount = 5, productNumber = 1, position = 0, totalPrice = 0;
 
     public static void productsTable() {
@@ -50,6 +52,9 @@ class Products {
 
             }
 
+            System.out.print("Select quantitiy of " + productName[productNumber-1] + "\t: ");
+            quantities[productNumber-1] = input.nextInt();
+
             y++;
 
         }
@@ -60,7 +65,7 @@ class Products {
 
         for (int i = 0; i < productCount; i++) {
 
-            totalPrice += (productPrice[i] * productsChosen[i]);
+            totalPrice += (productPrice[i] * productsChosen[i] * quantities[i]);
 
         }
 
@@ -71,7 +76,7 @@ class Products {
 
             if (productsChosen[position] == 1 ) {
 
-                System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + productPrice[position]);
+                System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + "LKR." +productPrice[position] + " x " + quantities[position]);
 
             }
 
