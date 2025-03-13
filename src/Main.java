@@ -1,10 +1,7 @@
-import java.lang.ref.Cleaner;
 import java.util.Objects;
 import java.util.Scanner;
 
 class Orders {
-
-    public static int userCount;
     public static String[] userNames = {"null", "null", "null", "null"};
     public static int[][][] userProductRelation = {{{1, 0, 0, 0, 0, 0, 0, 0}, {2, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}};
     public static int loginCount = 0;
@@ -292,7 +289,7 @@ class Main {
     public static void checkLogin(int option) {
         i = 0;
 
-        String[][] customersCredentials = { {"Ranil", "Ranil@123"}, {"Kamal", "Kamal@123"}, {"Mahinda", "Mahinda@123"} };
+        String[][] customersCredentials = { {"Ranil", "Ranil@123"}, {"Anura", "Anura@123"}, {"Mahinda", "Mahinda@123"} };
         String[][] employeeCredentials = { {"Admin", "Ad@123"}, {"Manager", "Mgr@123"}, {"Employee", "Emp@123"} };
 
         System.out.println("\n--------------------------------------------------------");
