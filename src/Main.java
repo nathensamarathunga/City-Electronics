@@ -1,10 +1,8 @@
-import java.lang.ref.Cleaner;
 import java.util.Objects;
 import java.util.Scanner;
 
 class Orders {
 
-    public static int userCount;
     public static String[] userNames = {"null", "null", "null", "null"};
     public static int[][][] userProductRelation = {{{1, 0, 0, 0, 0, 0, 0, 0}, {2, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}};
     public static int loginCount = 0;
