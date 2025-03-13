@@ -1,41 +1,63 @@
+import java.lang.ref.Cleaner;
 import java.util.Objects;
 import java.util.Scanner;
 
 class Orders {
 
     public static int userCount;
-    public static String[] userNames = {"null", "null", "null"};
-    //public static int[] orderID = {101, 102, 103, 104, 105};
-    //public static int[] productsChosenLocal = Products.productsChosen;
-    //public static int[] quantitiesLocal = Products.quantities;
+    public static String[] userNames = {"null", "null", "null", "null"};
+    public static int[][][] userProductRelation = {{{1, 0, 0, 0, 0, 0, 0, 0}, {2, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}, {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}}};
+    public static int loginCount = 0;
 
     public static void assignUsers() {
 
-        for(userCount = 0; userCount < 3; userCount++) {
+        userNames[loginCount] = Main.userCredentials[0][0];
 
-            userNames[userCount] = Main.userCredentials[userCount][0];
+        for (int count = 0; count < 8; count++) {
 
-            userCount++;
+            userProductRelation[loginCount][0][count] = Products.productsChosen[count];
+            userProductRelation[loginCount][1][count] = Products.quantities[count];
+
+
+        }
+
+        loginCount++;
+
+
+    }
+
+
+    public static void viewOrders() {
+
+        int[] totalPrice = {0, 0, 0, 0, 0, 0, 0, 0};
+
+        for (int i = 0; i < loginCount; i++) {
+
+            System.out.println("--------------------------------------------------------");
+            System.out.println("Order ID\t: " + i);
+            System.out.println("User\t: " + userNames[i]);
+            System.out.println("--------------------------------------------------------");
+            System.out.println("Product\t\t\t\t|Unit Price\t|\tQuantity");
+
+            for(int y = 0; y < 8; y++) {
+
+                if(userProductRelation[i][0][y] == 1){
+
+                    System.out.println(Products.productName[y] + "\t\t|\t" + Products.productPrice[y] + "\t|\t" + userProductRelation[i][1][y]);
+
+                    totalPrice[i] += (Products.productPrice[y] * userProductRelation[i][1][y]);
+
+
+                }
+
+            }
+
+            System.out.println("Total Price\t: " + totalPrice[i]);
+            System.out.println("--------------------------------------------------------\n");
 
         }
 
     }
-
-    public static void setOrders() {
-
-        assignUsers();
-
-
-    }
-
-    public static void viewOrders() {
-
-        setOrders();
-
-
-
-    }
-
 
 }
 
@@ -47,7 +69,9 @@ class Products {
     public static int[] productPrice = {175000, 60000, 74000, 12000,  25000, 0, 0};
     public static int[] productsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
     public static int[] quantities = {0, 0, 0, 0, 0, 0, 0, 0};
-    public static int productCount = 5, productNumber = 1, position = 0, totalPrice = 0;
+    public static int[] backupProductsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
+    public static int[] backupQuantities = {0, 0, 0, 0, 0, 0, 0, 0};
+    public static int productCount = 5, position = 0, totalPrice = 0;
     public static void productsTable() {
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n--------------------------------------------------------");
@@ -66,7 +90,7 @@ class Products {
 
     public static void cartFunction() {
 
-        int i = 0, y = 0;
+        int selectionNumber = 0, y = 0, productNumber = 0;
 
         System.out.println("Add products to cart");
         System.out.println("--------------------------------------------------------");
@@ -75,27 +99,27 @@ class Products {
 
         while ((productNumber != 0) || (y < productCount)) {
 
-            System.out.print("Selection " + ++i + " : ");
+            System.out.print("Selection " + (++selectionNumber) + " : ");
             productNumber = input.nextInt();
 
             if (productNumber == 0)
                 break;
-            else {
-
+            else
                 productsChosen[productNumber - 1] = 1;
 
-            }
-
-            System.out.print("Select quantitiy of " + productName[productNumber-1] + "\t: ");
+            System.out.print("Select quantity of " + productName[productNumber-1] + "\t: ");
             quantities[productNumber-1] = input.nextInt();
 
             y++;
+
 
         }
 
     }
 
     public static void priceCalculation() {
+
+        int billNumber = 1;
 
         for (int i = 0; i < productCount; i++) {
 
@@ -110,7 +134,8 @@ class Products {
 
             if (productsChosen[position] == 1 ) {
 
-                System.out.println((position+1) + ". " + productName[position] + "\t\t-\t" + "LKR." +productPrice[position] + " x " + quantities[position]);
+                System.out.println((billNumber) + ". " + productName[position] + "\t\t-\t" + "LKR." +productPrice[position] + " x " + quantities[position]);
+                billNumber++;
 
             }
 
@@ -304,7 +329,11 @@ class Main {
 
         Products.productsTable();
         Products.cartFunction();
+        Orders.assignUsers();
         Products.priceCalculation();
+        Products.productsChosen = Products.backupProductsChosen;
+        Products.quantities = Products.backupQuantities;
+
 
     }
 
@@ -323,6 +352,7 @@ class Main {
                 break;
             case 2:
                 Orders.viewOrders();
+                break;
             default:
                 System.out.println("Invalid Selection");
         }
@@ -331,13 +361,25 @@ class Main {
 
     public static void main(String []args){
 
-        int userOption = loginPage();
+        System.out.println(Orders.userProductRelation[0][0][0]);
+        System.out.println(Orders.userProductRelation[0][1][0]);
 
-        if (userOption == 1)
-            customerActions();
-        else
-            employeeActions();
+        boolean exitApp = false;
 
+        while (!exitApp) {
 
+            int userOption = loginPage();
+
+            if (userOption == 1)
+                customerActions();
+            else
+                employeeActions();
+
+            System.out.println("Do you want to exit App?");
+            String choice = input.next();
+
+            if (choice.equalsIgnoreCase("Y"))
+                exitApp = true;
+        }
     }
 }
