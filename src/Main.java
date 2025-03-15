@@ -15,15 +15,10 @@ class Orders {
 
             userProductRelation[loginCount][0][count] = Products.productsChosen[count];
             userProductRelation[loginCount][1][count] = Products.quantities[count];
-
-
         }
 
         loginCount++;
-
-
     }
-
 
     public static void viewOrders() {
 
@@ -47,16 +42,12 @@ class Orders {
 
 
                 }
-
             }
 
             System.out.println("Total Price\t: " + totalPrice[i]);
             System.out.println("--------------------------------------------------------\n");
-
         }
-
     }
-
 }
 
 
@@ -81,9 +72,7 @@ class Products {
         for (int i = 0; i < productCount; i++) {
 
             System.out.println((i+1) + ". " + productName[i] + "\t\t-\t" + productPrice[i]);
-
         }
-
     }
 
     public static void cartFunction() {
@@ -109,10 +98,7 @@ class Products {
             quantities[productNumber-1] = input.nextInt();
 
             y++;
-
-
         }
-
     }
 
     public static void priceCalculation() {
@@ -122,7 +108,6 @@ class Products {
         for (int i = 0; i < productCount; i++) {
 
             totalPrice += (productPrice[i] * productsChosen[i] * quantities[i]);
-
         }
 
         System.out.println("--------------------------------------------------------");
@@ -134,15 +119,11 @@ class Products {
 
                 System.out.println((billNumber) + ". " + productName[position] + "\t\t-\t" + "LKR." +productPrice[position] + " x " + quantities[position]);
                 billNumber++;
-
             }
-
         }
 
         System.out.println("LKR." + totalPrice);
         System.out.println("--------------------------------------------------------");
-
-
     }
 
     public static void changeProducts() {
@@ -189,7 +170,6 @@ class Products {
         System.out.println("Successfully added product " + productName[productCount]);
 
         productCount++;
-
     }
 
     public static void modifyProduct() {
@@ -202,7 +182,6 @@ class Products {
 
         System.out.print("Enter product price\t: ");
         productPrice[position-1] = input.nextInt();
-
     }
 
     public static void removeProduct() {
@@ -235,8 +214,6 @@ class Products {
         }
         else
             System.out.println("Aborted....");
-
-
     }
 }
 
@@ -318,9 +295,7 @@ class Main {
                 else
                     i++;
             }
-
         }
-
     }
 
     public static void customerActions() {
@@ -331,8 +306,6 @@ class Main {
         Products.priceCalculation();
         Products.productsChosen = Products.backupProductsChosen;
         Products.quantities = Products.backupQuantities;
-
-
     }
 
     public static void employeeActions() {
@@ -354,7 +327,6 @@ class Main {
             default:
                 System.out.println("Invalid Selection");
         }
-
     }
 
     public static void main(String []args){
