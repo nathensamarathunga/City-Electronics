@@ -50,7 +50,6 @@ class Orders {
     }
 }
 
-
 class Products {
 
     public static Scanner input = new Scanner(System.in);
@@ -61,6 +60,7 @@ class Products {
     public static int[] backupProductsChosen = {0, 0, 0, 0, 0, 0, 0, 0};
     public static int[] backupQuantities = {0, 0, 0, 0, 0, 0, 0, 0};
     public static int productCount = 5, position = 0, totalPrice = 0;
+
     public static void productsTable() {
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n--------------------------------------------------------");
@@ -329,7 +329,7 @@ class Main {
         }
     }
 
-    public static void main(String []args){
+    public static void main(String []args) {
 
         System.out.println(Orders.userProductRelation[0][0][0]);
         System.out.println(Orders.userProductRelation[0][1][0]);
